@@ -138,13 +138,11 @@ The compiled application will be available in `src-tauri/target/release`.
 
 ![alt text](image.png)
 
-## What TimePlease is NOT
-
-- ❌ **Not a Task Manager**: No to-do lists or task tracking
-- ❌ **Not a Calendar**: No scheduling features
-- ❌ **Not a Team Tool**: Designed for single-user focus
-
-If you need these features, I would highly recommend super-productivity.
+## What TimePlease is Does NOT have
+- No to-do lists or task tracking
+- No scheduling features
+I have intentionally kept it simple.
+If you need these features, I would highly recommend super-productivity or Todoist.
 
 
 ## Contributing
