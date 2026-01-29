@@ -1,0 +1,76 @@
+1. Core Tracking Engines
+
+The app operates in two distinct modes. Every session is "mapped" to a Project.
+
+    Pomodoro Mode: * Traditional Focus/Short Break/Long Break cycles.
+
+        Configurable durations (Default: 25/5/15 mins).
+
+        Automatic cycle counting (e.g., Long Break after 4 sessions).
+
+    Free Flow Mode: * Standard stopwatch functionality (Count-up).
+
+        Manual stop when the task is finished.
+
+    The "Honesty Check" (Post-Session):
+
+        Upon ending any session, a mandatory prompt asks: "How many minutes did you actually work?"
+
+        Defaults to the full elapsed time, but allows manual override.
+
+        optional Includes a Session Label field "what did you work on so that you can look back on it later" (e.g., "Refactoring login logic").
+
+2. Project Management (The Context)
+
+A "Project" is a simple bucket for organizing sessions. This is strictly for categorization, not task management.
+
+    Project CRUD:
+
+        Create: Name, Color Code, and a dedicated Notes field (Markdown-lite or plain text).
+
+        Read: List of active projects.
+
+        Update: Edit name, notes, or color.
+
+        Delete/Archive: Archive projects to hide them from the active timer list while preserving their historical data in metrics.
+
+3. The Minimalist HUD (The Visualizer)
+A "Visibility over Velocity" feature to keep the user focused.
+
+    Always-on-Top Clock: A tiny, floating window displaying current session time.
+
+    Draggable UI: Can be moved anywhere on the screen.
+
+    Toggleable: Can be completely disabled via settings.
+
+    Dynamic State: Changes color based on state (e.g., Red for Pomodoro Focus, Green for Break, Blue for Free Flow).
+
+4. Metrics & Statistics
+
+Data is calculated on-the-fly from the JSON logs.
+
+    Daily Timeline: A visual "bar" or list showing when work happened throughout the day.
+
+    Breakdown by Project: Pie/Bar chart showing which project took the most time.
+
+    Productivity Efficiency: A ratio showing "Actual Work" vs. "Total Elapsed Time" (derived from the Honesty Check).
+
+    Daily Break Counter: A simple integer count of how many breaks were taken today (does not store break "sessions," just a tally).
+
+    History Log: A searchable list of all past sessions.
+
+5. Data Architecture (JSON)
+
+To ensure future cloud-syncing compatibility, the data is split into logic-based files.
+File	Purpose	Key Data Points
+projects.json	Project Metadata	uuid, name, notes, is_archived, color.
+sessions.json	The Work History	uuid, project_id, type, start_time, end_time, actual_work_minutes, label.
+daily_stats.json	Daily Aggregates	date, breaks_taken (counter).
+settings.json	User Preferences	pomodoro_config, hud_enabled, theme_preference.
+Constraints (What this app is NOT)
+
+    NOT a Task Manager (no to-do lists within projects).
+
+    NOT a Calendar (no scheduling).
+
+    NOT a Team Tool (single-user focus).
